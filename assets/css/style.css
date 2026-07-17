@@ -539,6 +539,38 @@ ul { list-style: none; }
   font-weight: 700;
 }
 
+.social {
+  display: grid;
+  gap: 0.55rem;
+  margin-bottom: 0.85rem;
+}
+.social-link {
+  display: grid;
+  gap: 0.1rem;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  background: #fff;
+  text-decoration: none;
+  color: var(--ink);
+  font-weight: 700;
+}
+.social-link span {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+.social-link:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+  text-decoration: none;
+}
+.social-link:hover span { color: var(--blue); }
+.links-secondary {
+  padding-top: 0.35rem;
+  border-top: 1px solid var(--line);
+}
+
 .directions {
   margin-bottom: 1rem;
   padding: 1rem 1.1rem;
@@ -568,13 +600,30 @@ ul { list-style: none; }
   color: var(--muted);
   font-size: 0.9rem;
 }
+.foot-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem 1.25rem;
+  max-width: var(--max);
+  margin-bottom: 0.55rem;
+}
 .foot-title {
   font-family: var(--display);
   color: var(--ink);
   font-size: 1.1rem;
-  margin-bottom: 0.4rem;
-  max-width: var(--max);
+  margin: 0;
 }
+.foot-social {
+  display: flex;
+  gap: 1rem;
+}
+.foot-social a {
+  font-weight: 700;
+  text-decoration: none;
+}
+.foot-social a:hover { text-decoration: underline; }
 .foot p:last-child {
   max-width: var(--max);
 }
