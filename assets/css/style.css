@@ -1,0 +1,666 @@
+/* =========================================================
+   St. Thomas — Parish Sign Frame
+   Plan:
+   - Subject: OCA parish, Kokomo seekers; job: get people to the door
+   - Color: Sign Blue #153A6B, Cool Paper #F5F7FA, Door #9B2433,
+            Candle #C9A227, Ink #1A2332, Mist #E8EEF5
+   - Type: Literata (display) + Source Sans 3 (body)
+   - Layout: left rail as architecture; split hero; schedule table
+   - Signature: full-height blue rail + gold three-bar cross
+   - Risk: cool blue paper (not cream) + structural rail (not cards)
+   - Cut: grain, glass, scroll-reveal, giant type, dual sticky bars
+   ========================================================= */
+
+:root {
+  --blue: #153A6B;
+  --blue-deep: #0F2A4F;
+  --paper: #F5F7FA;
+  --mist: #E8EEF5;
+  --ink: #1A2332;
+  --muted: #5B6678;
+  --door: #9B2433;
+  --candle: #C9A227;
+  --line: rgba(26, 35, 50, 0.12);
+  --rail: 3.25rem;
+  --max: 68rem;
+  --display: "Literata", "Palatino Linotype", Palatino, serif;
+  --sans: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  font-family: var(--sans);
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.65;
+  font-size: 1.0625rem;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+a { color: var(--blue); text-underline-offset: 0.15em; }
+a:hover { color: var(--door); }
+ul { list-style: none; }
+
+.skip {
+  position: absolute;
+  left: 1rem;
+  top: -100px;
+  z-index: 100;
+  background: var(--candle);
+  color: var(--ink);
+  padding: 0.6rem 0.9rem;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.skip:focus { top: 1rem; }
+
+/* Signature rail */
+.rail {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: var(--rail);
+  background: var(--blue);
+  z-index: 50;
+  display: grid;
+  justify-items: center;
+  padding-top: 1.15rem;
+  color: var(--candle);
+  box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.06);
+}
+
+.page {
+  margin-left: var(--rail);
+  min-height: 100vh;
+}
+
+/* Header */
+.top {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.95rem clamp(1rem, 3vw, 2rem);
+  background: rgba(245, 247, 250, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid transparent;
+}
+.top.is-scrolled {
+  border-bottom-color: var(--line);
+  box-shadow: 0 8px 24px rgba(15, 42, 79, 0.05);
+}
+
+.brand {
+  text-decoration: none;
+  color: inherit;
+  min-width: 0;
+}
+.brand-name {
+  display: block;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  line-height: 1.15;
+  color: var(--ink);
+}
+.brand-meta {
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin-top: 0.15rem;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+}
+.menu a {
+  text-decoration: none;
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+.menu a:hover { color: var(--blue); }
+.menu-cta {
+  background: var(--door);
+  color: #fff !important;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+}
+.menu-cta:hover { background: #7f1c29; color: #fff !important; }
+
+.menu-btn {
+  display: none;
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+}
+.menu-btn span {
+  display: block;
+  height: 2px;
+  width: 1.25rem;
+  background: var(--ink);
+  margin-inline: auto;
+}
+
+/* Hero */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  align-items: center;
+  padding: clamp(1.25rem, 3vw, 2rem) clamp(1rem, 3vw, 2rem) clamp(2rem, 5vw, 3.5rem);
+}
+
+.hero-photo {
+  margin: 0;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: var(--mist);
+  aspect-ratio: 5 / 4;
+  box-shadow: 0 18px 40px rgba(15, 42, 79, 0.12);
+}
+.hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+.eyebrow {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 0.75rem;
+}
+
+.invite {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  line-height: 1;
+  color: var(--blue-deep);
+  margin-bottom: 0.55rem;
+}
+
+.hero h1 {
+  font-family: var(--display);
+  font-weight: 650;
+  font-size: clamp(1.7rem, 3vw, 2.25rem);
+  line-height: 1.15;
+  margin-bottom: 0.9rem;
+}
+.hero h1 em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--door);
+}
+
+.lede {
+  color: var(--muted);
+  max-width: 34rem;
+  margin-bottom: 1.25rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.15rem;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+.btn-primary {
+  background: var(--blue);
+  color: #fff;
+}
+.btn-primary:hover { background: var(--blue-deep); color: #fff; }
+.btn-quiet {
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--line);
+}
+.btn-quiet:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.next {
+  font-size: 0.95rem;
+  color: var(--muted);
+  border-left: 3px solid var(--candle);
+  padding-left: 0.75rem;
+}
+
+/* Blocks */
+.block {
+  padding: clamp(2.25rem, 5vw, 3.75rem) clamp(1rem, 3vw, 2rem);
+}
+
+.block > :is(.block-head, .prose, .schedule, .note, .steps, .story-grid, .verse, .people, .photos, .contact-grid, .directions, .map),
+.hero {
+  max-width: var(--max);
+}
+
+.block-tint {
+  background: var(--mist);
+}
+
+.block-tint > :is(.block-head, .prose, .schedule, .note, .steps, .story-grid, .verse, .people, .photos, .contact-grid, .directions, .map) {
+  max-width: var(--max);
+}
+
+.block-head {
+  margin-bottom: 1.35rem;
+}
+.block-head h2 {
+  font-family: var(--display);
+  font-size: clamp(1.85rem, 3vw, 2.4rem);
+  font-weight: 650;
+  line-height: 1.15;
+  margin-bottom: 0.35rem;
+}
+.sub {
+  color: var(--muted);
+  max-width: 36rem;
+}
+
+.prose {
+  max-width: 40rem;
+}
+.prose p + p { margin-top: 0.9rem; }
+.prose p { color: var(--muted); }
+.prose strong { color: var(--ink); }
+
+/* Schedule table */
+.schedule {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 0.9rem;
+  overflow: hidden;
+}
+.schedule th,
+.schedule td {
+  text-align: left;
+  padding: 0.95rem 1rem;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line);
+}
+.schedule thead th {
+  background: var(--blue);
+  color: #fff;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.schedule tbody th {
+  font-family: var(--display);
+  font-weight: 650;
+  color: var(--ink);
+  width: 34%;
+}
+.schedule td { color: var(--muted); }
+.schedule tbody tr:last-child th,
+.schedule tbody tr:last-child td { border-bottom: 0; }
+.schedule tbody tr:first-child th,
+.schedule tbody tr:first-child td {
+  background: rgba(21, 58, 107, 0.04);
+}
+
+.note {
+  margin-top: 1rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.note a { font-weight: 600; }
+
+/* First visit steps */
+.steps {
+  list-style: none;
+  display: grid;
+  gap: 0.75rem;
+  counter-reset: step;
+  max-width: 42rem;
+}
+.steps li {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  column-gap: 0.85rem;
+  row-gap: 0.15rem;
+  align-items: start;
+  padding: 0.95rem 1rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 0.85rem;
+}
+.steps li::before {
+  counter-increment: step;
+  content: counter(step);
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--door);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.steps strong {
+  grid-column: 2;
+  font-family: var(--display);
+  font-size: 1.15rem;
+  min-width: 0;
+}
+.steps span {
+  grid-column: 2;
+  color: var(--muted);
+  font-size: 0.98rem;
+  min-width: 0;
+}
+
+/* Story */
+.story-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 1.5rem 2rem;
+  align-items: start;
+  margin-bottom: 1.25rem;
+}
+.milestones {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 0.9rem;
+  padding: 0.35rem 1rem;
+}
+.milestones > div {
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  gap: 0.75rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.milestones > div:last-child { border-bottom: 0; }
+.milestones b { color: var(--blue); font-size: 0.92rem; }
+.milestones p { color: var(--muted); font-size: 0.95rem; }
+
+.verse {
+  background: var(--blue);
+  color: #fff;
+  border-radius: 0.9rem;
+  padding: 1.4rem 1.5rem;
+  text-align: center;
+}
+.verse p {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: clamp(1.25rem, 2.4vw, 1.7rem);
+  line-height: 1.35;
+}
+.verse cite {
+  display: block;
+  margin-top: 0.55rem;
+  font-style: normal;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--candle);
+  font-weight: 700;
+}
+
+/* Clergy */
+.people {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.people article {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 0.9rem;
+  padding: 1.2rem;
+}
+.people h3 {
+  font-family: var(--display);
+  font-size: 1.3rem;
+  margin-bottom: 0.2rem;
+}
+.role {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--door);
+  font-weight: 700;
+  margin-bottom: 0.55rem;
+}
+.people a { font-weight: 600; text-decoration: none; }
+.people a:hover { text-decoration: underline; }
+.dim { color: var(--muted); }
+
+/* Gallery */
+.photos {
+  display: grid;
+  grid-template-columns: 1.3fr 0.85fr;
+  grid-template-areas:
+    "main sign"
+    "main archive";
+  gap: 0.85rem;
+}
+.photos-main { grid-area: main; min-height: 22rem; }
+.photos figure {
+  position: relative;
+  margin: 0;
+  border-radius: 0.9rem;
+  overflow: hidden;
+  background: #d7dee8;
+  min-height: 12rem;
+}
+.photos img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.photos figure:nth-child(2) img { object-position: center 28%; }
+.photos figcaption {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 1;
+  padding: 2rem 0.9rem 0.75rem;
+  background: linear-gradient(transparent, rgba(15, 42, 79, 0.82));
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+/* Contact */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.contact-grid h3,
+.directions h3 {
+  font-family: var(--display);
+  font-size: 1.25rem;
+  margin-bottom: 0.45rem;
+}
+.contact-grid p,
+.directions p { color: var(--muted); }
+.contact-grid a { font-weight: 600; text-decoration: none; }
+.contact-grid a:hover { text-decoration: underline; }
+
+.reach, .links { display: grid; gap: 0.4rem; }
+.reach li {
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  gap: 0.4rem;
+}
+.reach span {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.directions {
+  margin-bottom: 1rem;
+  padding: 1rem 1.1rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 0.9rem;
+}
+
+.map {
+  border-radius: 0.9rem;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #d9e2ec;
+  min-height: 18rem;
+}
+.map iframe {
+  width: 100%;
+  height: 18rem;
+  border: 0;
+  display: block;
+}
+
+/* Footer */
+.foot {
+  border-top: 1px solid var(--line);
+  padding: 1.75rem clamp(1rem, 3vw, 2rem) 2.25rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.foot-title {
+  font-family: var(--display);
+  color: var(--ink);
+  font-size: 1.1rem;
+  margin-bottom: 0.4rem;
+  max-width: var(--max);
+}
+.foot p:last-child {
+  max-width: var(--max);
+}
+.foot a { font-weight: 600; }
+
+/* Focus */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--candle);
+  outline-offset: 3px;
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .hero,
+  .story-grid,
+  .people,
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+  .photos {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "main main"
+      "sign archive";
+  }
+  .photos-main { min-height: 16rem; }
+}
+
+@media (max-width: 780px) {
+  :root { --rail: 0.55rem; }
+  .rail-cross { display: none; }
+
+  .menu-btn { display: flex; }
+  .menu {
+    position: fixed;
+    top: 4.1rem;
+    right: 0;
+    width: min(17rem, 86vw);
+    height: calc(100vh - 4.1rem);
+    background: rgba(245, 247, 250, 0.98);
+    border-left: 1px solid var(--line);
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1rem;
+    gap: 0.25rem;
+    transform: translateX(105%);
+    transition: transform 0.25s ease;
+  }
+  .menu.open { transform: translateX(0); }
+  .menu a {
+    padding: 0.8rem 0.65rem;
+    border-radius: 0.6rem;
+  }
+  .menu-cta { text-align: center; }
+
+  .schedule,
+  .schedule thead,
+  .schedule tbody,
+  .schedule th,
+  .schedule td,
+  .schedule tr { display: block; }
+  .schedule thead { display: none; }
+  .schedule tr {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .schedule tbody th {
+    width: auto;
+    padding: 0 0 0.25rem;
+  }
+  .schedule td {
+    padding: 0.1rem 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .photos {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "main"
+      "sign"
+      "archive";
+  }
+  .photos figure { min-height: 14rem; }
+  .hero-actions { flex-direction: column; }
+  .btn { width: 100%; }
+  .reach li { grid-template-columns: 1fr; gap: 0.1rem; }
+}
